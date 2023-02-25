@@ -41,18 +41,18 @@ class GamePage:
 
         # 添加素材
         skindir = 'resources/skin1/'
-        tile_shapes = [skindir + '空.gif', skindir + '墙壁.gif', skindir + '通道.gif', skindir + '目标.gif', skindir + '箱子.gif', skindir + '目标箱子.gif']
+        tile_shapes = [skindir + 'empty.gif', skindir + 'wall.gif', skindir + 'road.gif', skindir + 'target.gif', skindir + 'box.gif', skindir + 'target_box.gif']
         for i in tile_shapes:
             turtle.addshape(i)
-        turtle.addshape(skindir + '编程猫.gif')
-        turtle.addshape(skindir + '成功.gif')
-        turtle.addshape(skindir + '通关.gif')
+        turtle.addshape(skindir + 'player.gif')
+        turtle.addshape(skindir + 'success.gif')
+        turtle.addshape(skindir + 'pass.gif')
 
         # 初始化砖块和玩家画笔
         tile = turtle.Pen()
         tile.penup()
         player = turtle.Pen()
-        player.shape(skindir + '编程猫.gif')
+        player.shape(skindir + 'player.gif')
         player.penup()
 
         # 监听
@@ -128,10 +128,10 @@ class GamePage:
             if win_flag and not self.level_gap:
                 self.level_gap = True
                 if self.level_num < level_store_length:
-                    self.win_or_lose.shape(skindir + '成功.gif')
+                    self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
                 else:
-                    self.win_or_lose.shape(skindir + '通关.gif')
+                    self.win_or_lose.shape(skindir + 'pass.gif')
 
             turtle.update()
 
