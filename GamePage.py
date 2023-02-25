@@ -23,7 +23,7 @@ class GamePage:
 
     level_gap = False
     levelManager = None
-    win_or_lose = turtle.Pen()
+    win_or_lose = None
 
     def __init__(self, gameLevel):
         self.gameLevel = gameLevel
@@ -136,6 +136,7 @@ class GamePage:
                         break
 
             if win_flag and not self.level_gap:
+                self.win_or_lose = turtle.Pen()
                 self.level_gap = True
                 if self.level_num < level_store_length:
                     self.win_or_lose.shape(skindir + 'success.gif')
