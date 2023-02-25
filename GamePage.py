@@ -12,9 +12,9 @@ class GamePage:
     level_num = 1
     level_num_pre = 1
 
-    GRID = []
     WIDTH = 0
     HEIGHT = 0
+    GRID = []
     player_grid_x = 0
     player_grid_y = 0
 
@@ -55,6 +55,8 @@ class GamePage:
         player.shape(skindir + 'player.gif')
         player.penup()
 
+        turtle.tracer(False)
+
         # 监听
         turtle.onkeyrelease(self.move_up, 'Up')
         turtle.onkeyrelease(self.move_down, 'Down')
@@ -63,7 +65,15 @@ class GamePage:
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.listen()
 
-        turtle.tracer(False)
+        self.create_button(skindir + 'player.gif', -300, -350).onclick(self.button_left_click)
+        self.create_button(skindir + 'player.gif', -160, -350).onclick(self.button_right_click)
+        self.create_button(skindir + 'player.gif', -230, -280).onclick(self.button_up_click)
+        self.create_button(skindir + 'player.gif', -230, -350).onclick(self.button_down_click)
+        self.create_button(skindir + 'player.gif', 100, -350).onclick(self.button_return_click)
+
+        turtle.hideturtle()
+        turtle.ontimer(self.count_up, 1000)
+
         while True:
             # 读取下一关卡
             if self.level_num != self.level_num_pre:
@@ -164,3 +174,31 @@ class GamePage:
 
     def is_box(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 4 or grid[grid_y][grid_x] == 5
+
+    def button_left_click(self, x, y):
+        self.move_left()
+
+    def button_right_click(self, x, y):
+        self.move_right()
+
+    def button_up_click(self, x, y):
+        self.move_up()
+
+    def button_down_click(self, x, y):
+        self.move_down()
+
+    def button_return_click(self, x, y):
+        self.load_level()
+
+    def create_button(self, button_shape, x, y):
+        screen = turtle.Screen()
+        screen.register_shape(button_shape)
+        button = turtle.Turtle()
+        button.shape(button_shape)
+        button.penup()
+        button.goto(x, y)
+        return button
+
+    def count_up(self):
+        self.timer += 1
+        turtle.ontimer(self.count_up, 1000)
