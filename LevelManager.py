@@ -2,6 +2,7 @@
 class LevelManager:
     # 关卡存放表，每一项用字符串表示关卡信息
     level_store = ['4_3_6_6_0b1c0c1a3a1e2b1b3a4b2a1c2c1a0a1e',
+                   '4_3_6_6_0b1c0c1a3a1e2b1b3a4b2a1c2c1a0a1e',
                    '4_5_7_7_1h3a1a2c1b3a2c3a1b2c4a2a1e4b1a0c1a2b1a0c1d',
                    '5_2_7_8_0b1e0b1a2c1d4a2b1b2c4a1c2a3a2a3a1a0a1b2a4a3a1a0b1a2c1a0b1e0a',
                    '7_1_9_8_0c1j3a2c1b2b4c2b1b3a1b3a1b3a1b2c4a2c1b2b4a3a1a2a1f2c1a0d1e0a',
