@@ -29,7 +29,6 @@ class GamePage:
         self.gameLevel = gameLevel
 
     def display(self):
-        turtle.setup(800, 800)
 
         self.levelManager = LevelManager()
         level_store_length = len(self.levelManager.level_store)
@@ -57,6 +56,8 @@ class GamePage:
 
         turtle.tracer(False)
 
+        myscreen = turtle.Screen()
+        myscreen.bgcolor("#E0FFFF")
         # 监听
         turtle.onkeyrelease(self.move_up, 'Up')
         turtle.onkeyrelease(self.move_down, 'Down')
@@ -65,11 +66,11 @@ class GamePage:
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.listen()
 
-        self.create_button(skindir + 'player.gif', -300, -350).onclick(self.button_left_click)
-        self.create_button(skindir + 'player.gif', -160, -350).onclick(self.button_right_click)
-        self.create_button(skindir + 'player.gif', -230, -280).onclick(self.button_up_click)
-        self.create_button(skindir + 'player.gif', -230, -350).onclick(self.button_down_click)
-        self.create_button(skindir + 'player.gif', 100, -350).onclick(self.button_return_click)
+        self.create_button(skindir + 'left.gif', -300, -380).onclick(self.button_left_click)
+        self.create_button(skindir + 'right.gif', -160, -380).onclick(self.button_right_click)
+        self.create_button(skindir + 'up.gif', -230, -310).onclick(self.button_up_click)
+        self.create_button(skindir + 'down.gif', -230, -380).onclick(self.button_down_click)
+        self.create_button(skindir + 'return.gif', 100, -380).onclick(self.button_return_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
@@ -125,8 +126,9 @@ class GamePage:
 
                 # 刷新计时器和计步器
                 turtle.clear()
-                turtle.goto(-100, 300)
-                turtle.write("计时: " + str(self.timer) + "       计步：" + str(self.counter), align="left", font=("Arial", 24, "normal"))
+                turtle.goto(-100, 380)
+                turtle.pencolor("red")
+                turtle.write("计时: " + str(self.timer) + "       计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
