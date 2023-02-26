@@ -2,7 +2,7 @@ import turtle
 from LevelManager import LevelManager
 
 class GamePage:
-    gameLevel = 0
+    grade_num = 0
 
     # 关卡初始化
     SIZE = 70
@@ -25,13 +25,13 @@ class GamePage:
     levelManager = None
     win_or_lose = None
 
-    def __init__(self, gameLevel):
-        self.gameLevel = gameLevel
+    def __init__(self, grade_num):
+        self.grade_num = grade_num
 
     def display(self):
 
         self.levelManager = LevelManager()
-        level_store_length = len(self.levelManager.level_store)
+        level_store_length = len(self.levelManager.level_store[self.grade_num])
         self.load_level()
 
         # 左上角砖块中心坐标
@@ -126,7 +126,7 @@ class GamePage:
 
                 # 刷新计时器和计步器
                 turtle.clear()
-                turtle.goto(-100, 380)
+                turtle.goto(-100, 350)
                 turtle.pencolor("red")
                 turtle.write("计时: " + str(self.timer) + "       计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
 
@@ -168,7 +168,7 @@ class GamePage:
         self.level_gap = False
 
     def load_level(self):
-        self.GRID, self.WIDTH, self.HEIGHT, self.player_grid_x, self.player_grid_y = self.levelManager.load_level(self.level_num)
+        self.GRID, self.WIDTH, self.HEIGHT, self.player_grid_x, self.player_grid_y = self.levelManager.load_level(self.grade_num, self.level_num)
         self.timer = 0
         self.counter = 0
 
