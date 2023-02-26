@@ -4,15 +4,18 @@ class LevelManager:
     level_store = [
         [
             '4_3_6_6_0b1c0c1a3a1e2b1b3a4b2a1c2c1a0a1e',
-            '5_2_7_8_0b1e0b1a2c1d4a2b1b2c4a1c2a3a2a3a1a0a1b2a4a3a1a0b1a2c1a0b1e0a'
+            '4_3_6_6_1g2a3a2b1b3a4a2b1b2a1a4a2a1b3a4a2b1g',
+            '3_2_6_6_1g2d1b2a4a2a3a1b2a1a4a3a1b2a4a2a3a1g'
         ],
         [
+            '5_2_7_8_0b1e0b1a2c1d4a2b1b2c4a1c2a3a2a3a1a0a1b2a4a3a1a0b1a2c1a0b1e0a',
             '4_5_7_7_1h3a1a2c1b3a2c3a1b2c4a2a1e4b1a0c1a2b1a0c1d',
             '7_1_9_8_0c1j3a2c1b2b4c2b1b3a1b3a1b3a1b2c4a2c1b2b4a3a1a2a1f2c1a0d1e0a'
         ],
         [
             '7_1_9_8_0c1j3a2c1b2b4c2b1b3a1b3a1b3a1b2c4a2c1b2b4a3a1a2a1f2c1a0d1e0a',
-            '4_6_8_8_0a1f0b1a3a2a3b1a0b1a3a2a4a3a1a0a1c2b4a1c2a4a2b4a2a1b2a1a4a1b2a1b2f1i'
+            '4_6_8_8_0a1f0b1a3a2a3b1a0b1a3a2a4a3a1a0a1c2b4a1c2a4a2b4a2a1b2a1a4a1b2a1b2f1i',
+            '4_4_8_7_0b1d0c1a2d1a0a1a2a4a2a4b2a1b3f1b2a4b2a4a2a1a0a1b2b1b0d1b0c'
         ]
     ]
     level_num = 0

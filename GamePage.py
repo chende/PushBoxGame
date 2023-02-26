@@ -1,5 +1,7 @@
 import turtle
 from LevelManager import LevelManager
+import copy
+import time
 
 class GamePage:
     grade_num = 0
@@ -17,6 +19,11 @@ class GamePage:
     GRID = []
     player_grid_x = 0
     player_grid_y = 0
+
+    GRID_pre = []
+    player_grid_x_pre = 0
+    player_grid_y_pre = 0
+    can_step_back = False
 
     timer = 0
     counter = 0
@@ -66,11 +73,12 @@ class GamePage:
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.listen()
 
-        self.create_button(skindir + 'left.gif', -300, -380).onclick(self.button_left_click)
-        self.create_button(skindir + 'right.gif', -160, -380).onclick(self.button_right_click)
-        self.create_button(skindir + 'up.gif', -230, -310).onclick(self.button_up_click)
-        self.create_button(skindir + 'down.gif', -230, -380).onclick(self.button_down_click)
-        self.create_button(skindir + 'return.gif', 100, -380).onclick(self.button_return_click)
+        self.create_button(skindir + 'left.gif', -320, -380).onclick(self.button_left_click)
+        self.create_button(skindir + 'right.gif', -180, -380).onclick(self.button_right_click)
+        self.create_button(skindir + 'up.gif', -250, -310).onclick(self.button_up_click)
+        self.create_button(skindir + 'down.gif', -250, -380).onclick(self.button_down_click)
+        self.create_button(skindir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
+        self.create_button(skindir + 'return.gif', 200, -380).onclick(self.button_return_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
@@ -103,6 +111,12 @@ class GamePage:
                         self.player_grid_x -= self.movement_grid_x
                         self.player_grid_y -= self.movement_grid_y
                     else:
+                        # 记录上次的地图和player位置
+                        self.GRID_pre = copy.deepcopy(self.GRID)
+                        self.player_grid_x_pre = player_temp_grid_x
+                        self.player_grid_y_pre = player_temp_grid_y
+                        self.can_step_back = True
+
                         self.GRID[box_next_y][box_next_x] += 2
                         self.GRID[self.player_grid_y][self.player_grid_x] -= 2
                 if player_temp_grid_x != self.player_grid_x:
@@ -166,11 +180,13 @@ class GamePage:
         self.level_num += 1
         self.win_or_lose.hideturtle()
         self.level_gap = False
+        self.can_step_back = False
 
     def load_level(self):
         self.GRID, self.WIDTH, self.HEIGHT, self.player_grid_x, self.player_grid_y = self.levelManager.load_level(self.grade_num, self.level_num)
         self.timer = 0
         self.counter = 0
+        self.can_step_back = False
 
     def is_wall(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 1
@@ -192,6 +208,19 @@ class GamePage:
 
     def button_return_click(self, x, y):
         self.load_level()
+
+    def button_step_back_click(self, x, y):
+        if self.can_step_back == True:
+            self.GRID = copy.deepcopy(self.GRID_pre)
+            self.player_grid_x = self.player_grid_x_pre
+            self.player_grid_y = self.player_grid_y_pre
+            self.can_step_back = False
+        else:
+            pen = turtle.Pen()
+            pen.color("red")
+            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
+            time.sleep(1)
+            pen.clear()
 
     def create_button(self, button_shape, x, y):
         screen = turtle.Screen()
