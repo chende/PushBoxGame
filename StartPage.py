@@ -13,19 +13,19 @@ class StartPage:
         myscreen = turtle.Screen()
         turtle.tracer(False)
         myscreen.bgcolor("#E0FFFF")
-        myscreen.bgpic("resources/back_ground.png")
+        myscreen.bgpic("resources/start/back_ground.png")
 
-        buttonStart = self.createButton("resources/start_button.gif", 0, -125)
+        buttonStart = self.createButton("resources/start/start_button.gif", 0, -125)
         buttonStart.onclick(self.onButtonStartClick)
 
-        buttonEasy = self.createButton("resources/easy.gif", 320, 0)
+        buttonEasy = self.createButton("resources/start/easy_button.gif", 320, 0)
         buttonEasy.onclick(self.onButtonEasyClick)
-        buttonMedium = self.createButton("resources/medium.gif", 320, -80)
+        buttonMedium = self.createButton("resources/start/medium_button.gif", 320, -80)
         buttonMedium.onclick(self.onButtonMediumClick)
-        buttonDifficult = self.createButton("resources/difficult.gif", 320, -160)
+        buttonDifficult = self.createButton("resources/start/difficult_button.gif", 320, -160)
         buttonDifficult.onclick(self.onButtonDifficultClick)
 
-        buttonInstruction = self.createButton("resources/instruction.gif", 320, -380)
+        buttonInstruction = self.createButton("resources/start/instruction_button.gif", 320, -380)
         buttonInstruction.onclick(self.onButtonInstructionClick)
 
         while self.alive:
@@ -64,7 +64,7 @@ class StartPage:
 
     def onButtonInstructionClick(self, x, y):
         self.instructionPage = turtle.Pen()
-        self.instructionPage.shape('resources/instruction_words.gif')
+        self.instructionPage.shape('resources/start/instruction_words.gif')
         self.instructionPage.onclick(self.closeInstructions)
 
     def closeInstructions(self, x, y):

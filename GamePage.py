@@ -73,12 +73,13 @@ class GamePage:
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.listen()
 
-        self.create_button(skindir + 'left.gif', -320, -380).onclick(self.button_left_click)
-        self.create_button(skindir + 'right.gif', -180, -380).onclick(self.button_right_click)
-        self.create_button(skindir + 'up.gif', -250, -310).onclick(self.button_up_click)
-        self.create_button(skindir + 'down.gif', -250, -380).onclick(self.button_down_click)
-        self.create_button(skindir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
-        self.create_button(skindir + 'return.gif', 200, -380).onclick(self.button_return_click)
+        buttondir = 'resources/button/'
+        self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
+        self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
+        self.create_button(buttondir + 'up.gif', -250, -310).onclick(self.button_up_click)
+        self.create_button(buttondir + 'down.gif', -250, -380).onclick(self.button_down_click)
+        self.create_button(buttondir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
+        self.create_button(buttondir + 'return.gif', 200, -380).onclick(self.button_return_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
