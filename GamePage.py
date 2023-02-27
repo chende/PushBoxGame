@@ -4,7 +4,7 @@ import copy
 import time
 
 class GamePage:
-    grade_num = 0
+    grade_num = 1
 
     # 关卡初始化
     SIZE = 70
@@ -38,6 +38,7 @@ class GamePage:
     def display(self):
 
         self.levelManager = LevelManager()
+        grade_length = len(self.levelManager.level_store)
         level_store_length = len(self.levelManager.level_store[self.grade_num])
         self.load_level()
 
@@ -158,6 +159,9 @@ class GamePage:
                 if self.level_num < level_store_length:
                     self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
+                elif self.grade_num < grade_length:
+                    self.win_or_lose.shape(skindir + 'pass.gif')
+                    self.win_or_lose.onclick(self.next_grade)
                 else:
                     self.win_or_lose.shape(skindir + 'pass.gif')
 
@@ -179,6 +183,13 @@ class GamePage:
 
     def next_level(self, x, y):
         self.level_num += 1
+        self.win_or_lose.hideturtle()
+        self.level_gap = False
+        self.can_step_back = False
+
+    def next_grade(self, x, y):
+        self.grade_num += 1
+        self.level_num = 1
         self.win_or_lose.hideturtle()
         self.level_gap = False
         self.can_step_back = False

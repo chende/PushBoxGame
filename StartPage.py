@@ -50,17 +50,17 @@ class StartPage:
     def onButtonEasyClick(self, x, y):
         turtle.hideturtle()
         self.alive = False
-        self.gradeNum = 0
+        self.gradeNum = 1
 
     def onButtonMediumClick(self, x, y):
         turtle.hideturtle()
         self.alive = False
-        self.gradeNum = 1
+        self.gradeNum = 2
 
     def onButtonDifficultClick(self, x, y):
         turtle.hideturtle()
         self.alive = False
-        self.gradeNum = 2
+        self.gradeNum = 3
 
     def onButtonInstructionClick(self, x, y):
         self.instructionPage = turtle.Pen()

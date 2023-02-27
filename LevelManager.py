@@ -26,7 +26,7 @@ class LevelManager:
     # 加载关卡
     def load_level(self, grade_num, level_num):
         a2z = 'abcdefghijklmnopqrstuvwxyz'
-        encoded = self.level_store[grade_num][level_num - 1]
+        encoded = self.level_store[grade_num - 1][level_num - 1]
         read_index = 0
         player_grid_x, read_index = self.read_value(encoded, read_index)
         player_grid_y, read_index = self.read_value(encoded, read_index)
