@@ -4,7 +4,7 @@ import copy
 import time
 
 class GamePage:
-    grade_num = 0
+    grade_num = 1
 
     # 关卡初始化
     SIZE = 70
@@ -38,6 +38,7 @@ class GamePage:
     def display(self):
 
         self.levelManager = LevelManager()
+        grade_length = len(self.levelManager.level_store)
         level_store_length = len(self.levelManager.level_store[self.grade_num])
         self.load_level()
 
@@ -73,12 +74,13 @@ class GamePage:
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.listen()
 
-        self.create_button(skindir + 'left.gif', -320, -380).onclick(self.button_left_click)
-        self.create_button(skindir + 'right.gif', -180, -380).onclick(self.button_right_click)
-        self.create_button(skindir + 'up.gif', -250, -310).onclick(self.button_up_click)
-        self.create_button(skindir + 'down.gif', -250, -380).onclick(self.button_down_click)
-        self.create_button(skindir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
-        self.create_button(skindir + 'return.gif', 200, -380).onclick(self.button_return_click)
+        buttondir = 'resources/button/'
+        self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
+        self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
+        self.create_button(buttondir + 'up.gif', -250, -310).onclick(self.button_up_click)
+        self.create_button(buttondir + 'down.gif', -250, -380).onclick(self.button_down_click)
+        self.create_button(buttondir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
+        self.create_button(buttondir + 'return.gif', 200, -380).onclick(self.button_return_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
@@ -157,6 +159,9 @@ class GamePage:
                 if self.level_num < level_store_length:
                     self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
+                elif self.grade_num < grade_length:
+                    self.win_or_lose.shape(skindir + 'pass.gif')
+                    self.win_or_lose.onclick(self.next_grade)
                 else:
                     self.win_or_lose.shape(skindir + 'pass.gif')
 
@@ -178,6 +183,13 @@ class GamePage:
 
     def next_level(self, x, y):
         self.level_num += 1
+        self.win_or_lose.hideturtle()
+        self.level_gap = False
+        self.can_step_back = False
+
+    def next_grade(self, x, y):
+        self.grade_num += 1
+        self.level_num = 1
         self.win_or_lose.hideturtle()
         self.level_gap = False
         self.can_step_back = False
