@@ -4,6 +4,7 @@ import copy
 import time
 
 class GamePage:
+    resrouce_path = ""
     grade_num = 1
 
     # 关卡初始化
@@ -32,7 +33,8 @@ class GamePage:
     levelManager = None
     win_or_lose = None
 
-    def __init__(self, grade_num):
+    def __init__(self, resrouce_path, grade_num):
+        self.resrouce_path = resrouce_path
         self.grade_num = grade_num
 
     def display(self):
@@ -47,7 +49,7 @@ class GamePage:
         origin_y = 0 + self.SIZE * (self.HEIGHT / 2 - 0.5)
 
         # 添加素材
-        skindir = 'resources/skin1/'
+        skindir = self.resrouce_path + '/'
         tile_shapes = [skindir + 'empty.gif', skindir + 'wall.gif', skindir + 'road.gif', skindir + 'target.gif', skindir + 'box.gif', skindir + 'target_box.gif']
         for i in tile_shapes:
             turtle.addshape(i)
@@ -75,7 +77,7 @@ class GamePage:
         turtle.onkeyrelease(self.step_back, 'b')
         turtle.listen()
 
-        buttondir = 'resources/button/'
+        buttondir = self.resrouce_path + '/'
         self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
         self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
         self.create_button(buttondir + 'up.gif', -250, -310).onclick(self.button_up_click)
