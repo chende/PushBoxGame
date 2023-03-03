@@ -1,11 +1,13 @@
 import turtle
 
 class StartPage:
+    resrouce_path = ''
     gradeNum = 1
     alive = True
     instructionPage = None
 
-    def __init__(self):
+    def __init__(self, resrouce_path):
+        self.resrouce_path = resrouce_path
         self.gradeNum = 1
 
     def display(self):
@@ -13,19 +15,21 @@ class StartPage:
         myscreen = turtle.Screen()
         turtle.tracer(False)
         myscreen.bgcolor("#E0FFFF")
-        myscreen.bgpic("resources/start/back_ground.png")
+        start_path = self.resrouce_path + "/"
+        myscreen.bgpic(start_path + "back_ground.png")
+        turtle.addshape(start_path + "instruction_words.gif")
 
-        buttonStart = self.createButton("resources/start/start_button.gif", 0, -125)
+        buttonStart = self.createButton(start_path + "start_button.gif", 0, -125)
         buttonStart.onclick(self.onButtonStartClick)
 
-        buttonEasy = self.createButton("resources/start/easy_button.gif", 320, 0)
+        buttonEasy = self.createButton(start_path + "easy_button.gif", 320, 0)
         buttonEasy.onclick(self.onButtonEasyClick)
-        buttonMedium = self.createButton("resources/start/medium_button.gif", 320, -80)
+        buttonMedium = self.createButton(start_path + "medium_button.gif", 320, -80)
         buttonMedium.onclick(self.onButtonMediumClick)
-        buttonDifficult = self.createButton("resources/start/difficult_button.gif", 320, -160)
+        buttonDifficult = self.createButton(start_path + "difficult_button.gif", 320, -160)
         buttonDifficult.onclick(self.onButtonDifficultClick)
 
-        buttonInstruction = self.createButton("resources/start/instruction_button.gif", 320, -380)
+        buttonInstruction = self.createButton(start_path + "instruction_button.gif", 320, -380)
         buttonInstruction.onclick(self.onButtonInstructionClick)
 
         while self.alive:
@@ -64,7 +68,7 @@ class StartPage:
 
     def onButtonInstructionClick(self, x, y):
         self.instructionPage = turtle.Pen()
-        self.instructionPage.shape('resources/start/instruction_words.gif')
+        self.instructionPage.shape(self.resrouce_path + '/' + 'instruction_words.gif')
         self.instructionPage.onclick(self.closeInstructions)
 
     def closeInstructions(self, x, y):

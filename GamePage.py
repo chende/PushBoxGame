@@ -4,6 +4,7 @@ import copy
 import time
 
 class GamePage:
+    resrouce_path = ""
     grade_num = 1
 
     # 关卡初始化
@@ -32,14 +33,15 @@ class GamePage:
     levelManager = None
     win_or_lose = None
 
-    def __init__(self, grade_num):
+    def __init__(self, resrouce_path, grade_num):
+        self.resrouce_path = resrouce_path
         self.grade_num = grade_num
 
     def display(self):
 
         self.levelManager = LevelManager()
         grade_length = len(self.levelManager.level_store)
-        level_store_length = len(self.levelManager.level_store[self.grade_num])
+        level_store_length = len(self.levelManager.level_store[self.grade_num-1])
         self.load_level()
 
         # 左上角砖块中心坐标
@@ -47,12 +49,13 @@ class GamePage:
         origin_y = 0 + self.SIZE * (self.HEIGHT / 2 - 0.5)
 
         # 添加素材
-        skindir = 'resources/skin1/'
+        skindir = self.resrouce_path + '/'
         tile_shapes = [skindir + 'empty.gif', skindir + 'wall.gif', skindir + 'road.gif', skindir + 'target.gif', skindir + 'box.gif', skindir + 'target_box.gif']
         for i in tile_shapes:
             turtle.addshape(i)
         turtle.addshape(skindir + 'player.gif')
         turtle.addshape(skindir + 'success.gif')
+        turtle.addshape(skindir + 'promotion.gif')
         turtle.addshape(skindir + 'pass.gif')
 
         # 初始化砖块和玩家画笔
@@ -72,9 +75,10 @@ class GamePage:
         turtle.onkeyrelease(self.move_left, 'Left')
         turtle.onkeyrelease(self.move_right, 'Right')
         turtle.onkeyrelease(self.load_level, 'r')
+        turtle.onkeyrelease(self.step_back, 'b')
         turtle.listen()
 
-        buttondir = 'resources/button/'
+        buttondir = self.resrouce_path + '/'
         self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
         self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
         self.create_button(buttondir + 'up.gif', -250, -310).onclick(self.button_up_click)
@@ -144,7 +148,8 @@ class GamePage:
                 turtle.clear()
                 turtle.goto(-100, 350)
                 turtle.pencolor("red")
-                turtle.write("计时: " + str(self.timer) + "       计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
+                gradeLeveltext = self.getGradeAndLevelText()
+                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="center", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -160,7 +165,7 @@ class GamePage:
                     self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
                 elif self.grade_num < grade_length:
-                    self.win_or_lose.shape(skindir + 'pass.gif')
+                    self.win_or_lose.shape(skindir + 'promotion.gif')
                     self.win_or_lose.onclick(self.next_grade)
                 else:
                     self.win_or_lose.shape(skindir + 'pass.gif')
@@ -200,6 +205,20 @@ class GamePage:
         self.counter = 0
         self.can_step_back = False
 
+    def step_back(self):
+        if self.can_step_back == True:
+            self.GRID = copy.deepcopy(self.GRID_pre)
+            self.player_grid_x = self.player_grid_x_pre
+            self.player_grid_y = self.player_grid_y_pre
+            self.can_step_back = False
+        else:
+            pen = turtle.Pen()
+            pen.color("red")
+            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
+            time.sleep(1)
+            pen.clear()
+            turtle.hideturtle()
+
     def is_wall(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 1
 
@@ -222,17 +241,7 @@ class GamePage:
         self.load_level()
 
     def button_step_back_click(self, x, y):
-        if self.can_step_back == True:
-            self.GRID = copy.deepcopy(self.GRID_pre)
-            self.player_grid_x = self.player_grid_x_pre
-            self.player_grid_y = self.player_grid_y_pre
-            self.can_step_back = False
-        else:
-            pen = turtle.Pen()
-            pen.color("red")
-            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
-            time.sleep(1)
-            pen.clear()
+        self.step_back()
 
     def create_button(self, button_shape, x, y):
         screen = turtle.Screen()
@@ -246,3 +255,21 @@ class GamePage:
     def count_up(self):
         self.timer += 1
         turtle.ontimer(self.count_up, 1000)
+
+    def getGradeAndLevelText(self):
+        text = ""
+        if self.grade_num == 1:
+            text = text + "初级"
+        elif self.grade_num == 2:
+            text = text + "中级"
+        else:
+            text = text + "高级"
+
+        if self.level_num == 1:
+            text = text + " 第一关"
+        elif self.level_num == 2:
+            text = text + " 第二关"
+        else:
+            text = text + " 第三关"
+
+        return text
