@@ -55,6 +55,7 @@ class GamePage:
             turtle.addshape(i)
         turtle.addshape(skindir + 'player.gif')
         turtle.addshape(skindir + 'success.gif')
+        turtle.addshape(skindir + 'promotion.gif')
         turtle.addshape(skindir + 'pass.gif')
 
         # 初始化砖块和玩家画笔
@@ -147,7 +148,8 @@ class GamePage:
                 turtle.clear()
                 turtle.goto(-100, 350)
                 turtle.pencolor("red")
-                turtle.write("计时: " + str(self.timer) + "       计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
+                gradeLeveltext = self.getGradeAndLevelText()
+                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="center", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -163,7 +165,7 @@ class GamePage:
                     self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
                 elif self.grade_num < grade_length:
-                    self.win_or_lose.shape(skindir + 'pass.gif')
+                    self.win_or_lose.shape(skindir + 'promotion.gif')
                     self.win_or_lose.onclick(self.next_grade)
                 else:
                     self.win_or_lose.shape(skindir + 'pass.gif')
@@ -253,3 +255,21 @@ class GamePage:
     def count_up(self):
         self.timer += 1
         turtle.ontimer(self.count_up, 1000)
+
+    def getGradeAndLevelText(self):
+        text = ""
+        if self.grade_num == 1:
+            text = text + "初级"
+        elif self.grade_num == 2:
+            text = text + "中级"
+        else:
+            text = text + "高级"
+
+        if self.level_num == 1:
+            text = text + " 第一关"
+        elif self.level_num == 2:
+            text = text + " 第二关"
+        else:
+            text = text + " 第三关"
+
+        return text
