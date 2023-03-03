@@ -39,7 +39,7 @@ class GamePage:
 
         self.levelManager = LevelManager()
         grade_length = len(self.levelManager.level_store)
-        level_store_length = len(self.levelManager.level_store[self.grade_num])
+        level_store_length = len(self.levelManager.level_store[self.grade_num-1])
         self.load_level()
 
         # 左上角砖块中心坐标
@@ -72,6 +72,7 @@ class GamePage:
         turtle.onkeyrelease(self.move_left, 'Left')
         turtle.onkeyrelease(self.move_right, 'Right')
         turtle.onkeyrelease(self.load_level, 'r')
+        turtle.onkeyrelease(self.step_back, 'b')
         turtle.listen()
 
         buttondir = 'resources/button/'
@@ -200,6 +201,20 @@ class GamePage:
         self.counter = 0
         self.can_step_back = False
 
+    def step_back(self):
+        if self.can_step_back == True:
+            self.GRID = copy.deepcopy(self.GRID_pre)
+            self.player_grid_x = self.player_grid_x_pre
+            self.player_grid_y = self.player_grid_y_pre
+            self.can_step_back = False
+        else:
+            pen = turtle.Pen()
+            pen.color("red")
+            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
+            time.sleep(1)
+            pen.clear()
+            turtle.hideturtle()
+
     def is_wall(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 1
 
@@ -222,17 +237,7 @@ class GamePage:
         self.load_level()
 
     def button_step_back_click(self, x, y):
-        if self.can_step_back == True:
-            self.GRID = copy.deepcopy(self.GRID_pre)
-            self.player_grid_x = self.player_grid_x_pre
-            self.player_grid_y = self.player_grid_y_pre
-            self.can_step_back = False
-        else:
-            pen = turtle.Pen()
-            pen.color("red")
-            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
-            time.sleep(1)
-            pen.clear()
+        self.step_back()
 
     def create_button(self, button_shape, x, y):
         screen = turtle.Screen()

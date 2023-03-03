@@ -14,6 +14,7 @@ class StartPage:
         turtle.tracer(False)
         myscreen.bgcolor("#E0FFFF")
         myscreen.bgpic("resources/start/back_ground.png")
+        turtle.addshape('resources/start/instruction_words.gif')
 
         buttonStart = self.createButton("resources/start/start_button.gif", 0, -125)
         buttonStart.onclick(self.onButtonStartClick)
