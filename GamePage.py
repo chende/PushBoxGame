@@ -69,6 +69,7 @@ class GamePage:
 
         myscreen = turtle.Screen()
         myscreen.bgcolor("#E0FFFF")
+
         # 监听
         turtle.onkeyrelease(self.move_up, 'Up')
         turtle.onkeyrelease(self.move_down, 'Down')
@@ -78,6 +79,7 @@ class GamePage:
         turtle.onkeyrelease(self.step_back, 'b')
         turtle.listen()
 
+        # 按钮
         buttondir = self.resrouce_path + '/'
         self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
         self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
@@ -146,10 +148,12 @@ class GamePage:
 
                 # 刷新计时器和计步器
                 turtle.clear()
-                turtle.goto(-100, 350)
+                turtle.penup()
+                turtle.goto(-260, 360)
                 turtle.pencolor("red")
                 gradeLeveltext = self.getGradeAndLevelText()
-                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="center", font=("Arial", 36, "normal"))
+                turtle.hideturtle()
+                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -213,11 +217,11 @@ class GamePage:
             self.can_step_back = False
         else:
             pen = turtle.Pen()
+            pen.hideturtle()
             pen.color("red")
             pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
             time.sleep(1)
             pen.clear()
-            turtle.hideturtle()
 
     def is_wall(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 1
@@ -266,10 +270,10 @@ class GamePage:
             text = text + "高级"
 
         if self.level_num == 1:
-            text = text + " 第一关"
+            text = text + "    第一关"
         elif self.level_num == 2:
-            text = text + " 第二关"
+            text = text + "    第二关"
         else:
-            text = text + " 第三关"
+            text = text + "    第三关"
 
         return text
