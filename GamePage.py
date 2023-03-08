@@ -4,6 +4,7 @@ import copy
 import time
 
 class GamePage:
+    alive = True
     resrouce_path = ""
     grade_num = 1
 
@@ -77,6 +78,7 @@ class GamePage:
         turtle.onkeyrelease(self.move_right, 'Right')
         turtle.onkeyrelease(self.load_level, 'r')
         turtle.onkeyrelease(self.step_back, 'b')
+        turtle.onkeyrelease(self.return_to_start, 'Escape')
         turtle.listen()
 
         # 按钮
@@ -91,7 +93,7 @@ class GamePage:
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
 
-        while True:
+        while self.alive:
             # 读取下一关卡
             if self.level_num != self.level_num_pre:
                 self.load_level()
@@ -149,11 +151,11 @@ class GamePage:
                 # 刷新计时器和计步器
                 turtle.clear()
                 turtle.penup()
-                turtle.goto(-260, 360)
+                turtle.goto(0, 360)
                 turtle.pencolor("red")
                 gradeLeveltext = self.getGradeAndLevelText()
                 turtle.hideturtle()
-                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="left", font=("Arial", 36, "normal"))
+                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="center", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -176,7 +178,8 @@ class GamePage:
 
             turtle.update()
 
-        turtle.done
+        # turtle.done
+        myscreen.clearscreen()
 
     def move_up(self):
         self.movement_grid_y = -1
@@ -222,6 +225,9 @@ class GamePage:
             pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
             time.sleep(1)
             pen.clear()
+
+    def return_to_start(self):
+        self.alive = False
 
     def is_wall(self, grid_x, grid_y, grid):
         return grid[grid_y][grid_x] == 1
