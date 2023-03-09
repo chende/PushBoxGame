@@ -12,7 +12,7 @@ class StartPage:
 
     def display(self):
         turtle.setup(800, 860)
-        turtle.screensize(700, 720)
+        turtle.screensize(700, 800)
         myscreen = turtle.Screen()
         turtle.tracer(False)
         myscreen.bgcolor("#E0FFFF")
