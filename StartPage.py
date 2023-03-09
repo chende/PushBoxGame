@@ -12,6 +12,7 @@ class StartPage:
 
     def display(self):
         turtle.setup(800, 860)
+        turtle.screensize(700, 720)
         myscreen = turtle.Screen()
         turtle.tracer(False)
         myscreen.bgcolor("#E0FFFF")
@@ -29,7 +30,7 @@ class StartPage:
         buttonDifficult = self.createButton(start_path + "difficult_button.gif", 320, -160)
         buttonDifficult.onclick(self.onButtonDifficultClick)
 
-        buttonInstruction = self.createButton(start_path + "instruction_button.gif", 320, -380)
+        buttonInstruction = self.createButton(start_path + "instruction_button.gif", 320, -350)
         buttonInstruction.onclick(self.onButtonInstructionClick)
 
         while self.alive:

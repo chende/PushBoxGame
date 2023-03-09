@@ -39,6 +39,7 @@ class GamePage:
         self.grade_num = grade_num
 
     def display(self):
+        (screen_x, screen_y) = turtle.screensize()
 
         self.levelManager = LevelManager()
         grade_length = len(self.levelManager.level_store)
@@ -83,12 +84,12 @@ class GamePage:
 
         # 按钮
         buttondir = self.resrouce_path + '/'
-        self.create_button(buttondir + 'left.gif', -320, -380).onclick(self.button_left_click)
-        self.create_button(buttondir + 'right.gif', -180, -380).onclick(self.button_right_click)
-        self.create_button(buttondir + 'up.gif', -250, -310).onclick(self.button_up_click)
-        self.create_button(buttondir + 'down.gif', -250, -380).onclick(self.button_down_click)
-        self.create_button(buttondir + 'back.gif', 100, -380).onclick(self.button_step_back_click)
-        self.create_button(buttondir + 'return.gif', 200, -380).onclick(self.button_return_click)
+        self.create_button(buttondir + 'left.gif', -320, -screen_y/2).onclick(self.button_left_click)
+        self.create_button(buttondir + 'right.gif', -180, -screen_y/2).onclick(self.button_right_click)
+        self.create_button(buttondir + 'up.gif', -250, -screen_y/2+60).onclick(self.button_up_click)
+        self.create_button(buttondir + 'down.gif', -250, -screen_y/2).onclick(self.button_down_click)
+        self.create_button(buttondir + 'back.gif', 100, -screen_y/2).onclick(self.button_step_back_click)
+        self.create_button(buttondir + 'return.gif', 200, -screen_y/2).onclick(self.button_return_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
@@ -151,7 +152,7 @@ class GamePage:
                 # 刷新计时器和计步器
                 turtle.clear()
                 turtle.penup()
-                turtle.goto(0, 360)
+                turtle.goto(0, screen_y/2-20)
                 turtle.pencolor("red")
                 gradeLeveltext = self.getGradeAndLevelText()
                 turtle.hideturtle()
