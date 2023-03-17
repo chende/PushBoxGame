@@ -11,6 +11,7 @@ class StartPage:
         self.gradeNum = 1
 
     def display(self):
+        turtle.title("疯狂推箱子")
         turtle.setup(800, 860)
         turtle.screensize(700, 800)
         myscreen = turtle.Screen()
@@ -18,19 +19,19 @@ class StartPage:
         myscreen.bgcolor("#E0FFFF")
         start_path = self.resrouce_path + "/"
         myscreen.bgpic(start_path + "back_ground.png")
-        turtle.addshape(start_path + "instruction_words.gif")
+        turtle.addshape(start_path + "game_guide.gif")
 
         buttonStart = self.createButton(start_path + "start_button.gif", 0, -125)
         buttonStart.onclick(self.onButtonStartClick)
 
-        buttonEasy = self.createButton(start_path + "easy_button.gif", 320, 0)
+        buttonEasy = self.createButton(start_path + "button_junior.gif", 320, 0)
         buttonEasy.onclick(self.onButtonEasyClick)
-        buttonMedium = self.createButton(start_path + "medium_button.gif", 320, -80)
+        buttonMedium = self.createButton(start_path + "button_middle.gif", 320, -80)
         buttonMedium.onclick(self.onButtonMediumClick)
-        buttonDifficult = self.createButton(start_path + "difficult_button.gif", 320, -160)
+        buttonDifficult = self.createButton(start_path + "button_senior.gif", 320, -160)
         buttonDifficult.onclick(self.onButtonDifficultClick)
 
-        buttonInstruction = self.createButton(start_path + "instruction_button.gif", 320, -350)
+        buttonInstruction = self.createButton(start_path + "button_instruction.gif", 320, -350)
         buttonInstruction.onclick(self.onButtonInstructionClick)
 
         while self.alive:
@@ -69,7 +70,7 @@ class StartPage:
 
     def onButtonInstructionClick(self, x, y):
         self.instructionPage = turtle.Pen()
-        self.instructionPage.shape(self.resrouce_path + '/' + 'instruction_words.gif')
+        self.instructionPage.shape(self.resrouce_path + '/' + 'game_guide.gif')
         self.instructionPage.onclick(self.closeInstructions)
 
     def closeInstructions(self, x, y):

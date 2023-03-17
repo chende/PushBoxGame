@@ -57,7 +57,7 @@ class GamePage:
             turtle.addshape(i)
         turtle.addshape(skindir + 'player.gif')
         turtle.addshape(skindir + 'success.gif')
-        turtle.addshape(skindir + 'promotion.gif')
+        turtle.addshape(skindir + 'promot.gif')
         turtle.addshape(skindir + 'pass.gif')
 
         # 初始化砖块和玩家画笔
@@ -90,6 +90,7 @@ class GamePage:
         self.create_button(buttondir + 'down.gif', -250, -screen_y/2+10).onclick(self.button_down_click)
         self.create_button(buttondir + 'back.gif', 100, -screen_y/2+10).onclick(self.button_step_back_click)
         self.create_button(buttondir + 'return.gif', 200, -screen_y/2+10).onclick(self.button_return_click)
+        self.create_button(buttondir + 'exit.gif', 300, -screen_y/2+10).onclick(self.button_exit_click)
 
         turtle.hideturtle()
         turtle.ontimer(self.count_up, 1000)
@@ -172,7 +173,7 @@ class GamePage:
                     self.win_or_lose.shape(skindir + 'success.gif')
                     self.win_or_lose.onclick(self.next_level)
                 elif self.grade_num < grade_length:
-                    self.win_or_lose.shape(skindir + 'promotion.gif')
+                    self.win_or_lose.shape(skindir + 'promot.gif')
                     self.win_or_lose.onclick(self.next_grade)
                 else:
                     self.win_or_lose.shape(skindir + 'pass.gif')
@@ -253,6 +254,9 @@ class GamePage:
 
     def button_step_back_click(self, x, y):
         self.step_back()
+
+    def button_exit_click(self, x, y):
+        self.alive = False
 
     def create_button(self, button_shape, x, y):
         screen = turtle.Screen()
