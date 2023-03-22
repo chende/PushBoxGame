@@ -5,6 +5,7 @@ class StartPage:
     gradeNum = 1
     alive = True
     instructionPage = None
+    showInstruction = False
 
     def __init__(self, resrouce_path):
         self.resrouce_path = resrouce_path
@@ -69,9 +70,12 @@ class StartPage:
         self.gradeNum = 3
 
     def onButtonInstructionClick(self, x, y):
-        self.instructionPage = turtle.Pen()
-        self.instructionPage.shape(self.resrouce_path + '/' + 'game_guide.gif')
-        self.instructionPage.onclick(self.closeInstructions)
+        if self.showInstruction == False:
+            self.instructionPage = turtle.Pen()
+            self.instructionPage.shape(self.resrouce_path + '/' + 'game_guide.gif')
+            self.instructionPage.onclick(self.closeInstructions)
+            self.showInstruction = True
 
     def closeInstructions(self, x, y):
         self.instructionPage.hideturtle()
+        self.showInstruction = False
