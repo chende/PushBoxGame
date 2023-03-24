@@ -1,5 +1,6 @@
 import turtle
 from LevelManager import LevelManager
+import score as sc
 import copy
 import time
 
@@ -29,6 +30,7 @@ class GamePage:
 
     timer = 0
     counter = 0
+    score = 0
 
     level_gap = False
     levelManager = None
@@ -37,6 +39,7 @@ class GamePage:
     def __init__(self, resrouce_path, grade_num):
         self.resrouce_path = resrouce_path
         self.grade_num = grade_num
+        self.score = sc.instance.caculateScore()
 
     def display(self):
         (screen_x, screen_y) = turtle.screensize()
@@ -157,7 +160,7 @@ class GamePage:
                 turtle.pencolor("red")
                 gradeLeveltext = self.getGradeAndLevelText()
                 turtle.hideturtle()
-                turtle.write(gradeLeveltext + "    计时: " + str(self.timer) + "    计步：" + str(self.counter), align="center", font=("Arial", 36, "normal"))
+                turtle.write(gradeLeveltext + "  计时: " + str(self.timer) + "  计步：" + str(self.counter) + "  积分: " + str(self.score), align="center", font=("Arial", 36, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -167,6 +170,9 @@ class GamePage:
                         break
 
             if win_flag and not self.level_gap:
+                sc.instance.addRecord(self.grade_num, self.level_num, self.timer, self.counter)
+                self.score = sc.instance.caculateScore()
+
                 self.win_or_lose = turtle.Pen()
                 self.level_gap = True
                 if self.level_num < level_store_length:
@@ -281,10 +287,10 @@ class GamePage:
             text = text + "高级"
 
         if self.level_num == 1:
-            text = text + "    第一关"
+            text = text + "  第一关"
         elif self.level_num == 2:
-            text = text + "    第二关"
+            text = text + "  第二关"
         else:
-            text = text + "    第三关"
+            text = text + "  第三关"
 
         return text
