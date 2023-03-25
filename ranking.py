@@ -3,7 +3,7 @@ from XPath import XPath
 
 class Ranking:
     data_path = ''
-    userName = "峻宇"
+    userName = "小宇"
     df = pd.DataFrame(columns=['玩家','等级','关卡','积分'])
 
     def __init__(self):
