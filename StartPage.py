@@ -40,12 +40,12 @@ class StartPage:
         buttonInstruction = self.createButton(start_path + "button_instruction.gif", 320, -350)
         buttonInstruction.onclick(self.onButtonInstructionClick)
 
-        buttonLogin = self.createButton(start_path + "button_instruction.gif", -320, 0)
+        buttonLogin = self.createButton(start_path + "button_login.gif", -320, 0)
         buttonLogin.onclick(self.onButtonLoginClick)
-        buttonRanking = self.createButton(start_path + "button_instruction.gif", -320, -80)
+        buttonRanking = self.createButton(start_path + "button_ranking.gif", -320, -80)
         buttonRanking.onclick(self.onButtonRankingClick)
-        buttonDeleteRanking = self.createButton(start_path + "button_instruction.gif", -320, -160)
-        buttonDeleteRanking.onclick(self.onButtonDeleteRankingClick)
+        buttonRemoveScore = self.createButton(start_path + "button_remove_score.gif", -320, -160)
+        buttonRemoveScore.onclick(self.onButtonRemoveScoreClick)
 
         while self.alive:
             turtle.clear()
@@ -123,7 +123,7 @@ class StartPage:
             self.rankingText.write(str, align="center", font=("Arial", 30, "normal"))
             self.rankingText.hideturtle()
 
-    def onButtonDeleteRankingClick(self, x, y):
+    def onButtonRemoveScoreClick(self, x, y):
         input = turtle.textinput("删除玩家积分", "请输入要删除积分的玩家姓名：")
         if input != None and input != '':
             rk.instance.deleteRanking(input)
