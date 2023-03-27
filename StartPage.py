@@ -1,5 +1,6 @@
 import turtle
 import ranking as rk
+import scoring as sc
 
 class StartPage:
     resrouce_path = ''
@@ -103,6 +104,7 @@ class StartPage:
         input = turtle.textinput("玩家登陆", "请输入姓名：")
         if input != None and input != '':
             rk.instance.userName = self.userName = input
+            sc.instance.clearScore()
 
     def onButtonRankingClick(self, x, y):
         if self.showInstruction == False:
@@ -127,3 +129,5 @@ class StartPage:
         input = turtle.textinput("删除玩家积分", "请输入要删除积分的玩家姓名：")
         if input != None and input != '':
             rk.instance.deleteRanking(input)
+            if input == self.userName:
+                sc.instance.clearScore()

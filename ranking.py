@@ -18,9 +18,9 @@ class Ranking:
     def addRecord(self, grade_num, level_num, score):
         # self.data.append([self.userName, grade_num, level_num, score])
         new_data = {'玩家': self.userName, '等级': grade_num, '关卡': level_num, '积分': score}
-        self.df.loc[len(self.df)] = new_data
+        df1 = self.df.append(new_data, ignore_index=True)
 
-        df2 = self.df.sort_values(['积分', '等级', '关卡', '玩家'], ascending=[False, False, False, True])
+        df2 = df1.sort_values(['积分', '等级', '关卡', '玩家'], ascending=[False, False, False, True])
         self.df = df2.drop_duplicates(subset=['玩家'], keep='first')
         self.df.to_csv(self.data_path, index=False)
         print(self.df)

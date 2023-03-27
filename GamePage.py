@@ -173,6 +173,8 @@ class GamePage:
             if win_flag and not self.level_gap:
                 sc.instance.addRecord(self.grade_num, self.level_num, self.timer, self.counter)
                 self.score = sc.instance.calculateScore()
+                if self.score > 0:
+                    rk.instance.addRecord(self.grade_num, self.level_num, self.score)
 
                 self.win_or_lose = turtle.Pen()
                 self.level_gap = True
@@ -263,8 +265,6 @@ class GamePage:
         self.step_back()
 
     def button_exit_click(self, x, y):
-        if self.score > 0:
-            rk.instance.addRecord(self.grade_num, self.level_num, self.score)
         self.alive = False
 
     def create_button(self, button_shape, x, y):

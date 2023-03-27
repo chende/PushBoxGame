@@ -23,5 +23,8 @@ class Scoring:
         # print("score:" + str(score))
         return score
 
+    def clearScore(self):
+        self.data = []
+
 # 单例对象
 instance = Scoring()
