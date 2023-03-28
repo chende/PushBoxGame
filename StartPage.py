@@ -57,7 +57,7 @@ class StartPage:
             turtle.goto(-400, 100)
             turtle.pencolor("red")
             turtle.hideturtle()
-            turtle.write("玩家: " + str(self.userName), align="left", font=("Arial", 32, "normal"))
+            turtle.write("玩家: " + str(self.userName), align="left", font=("Arial", self.fontSize, "normal"))
             turtle.update()
 
         buttonStart.hideturtle()
