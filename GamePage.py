@@ -36,6 +36,7 @@ class GamePage:
     level_gap = False
     levelManager = None
     win_or_lose = None
+    fontSize = 30
 
     def __init__(self, resrouce_path, grade_num):
         self.resrouce_path = resrouce_path
@@ -159,9 +160,9 @@ class GamePage:
                 turtle.penup()
                 turtle.goto(0, screen_y/2-20)
                 turtle.pencolor("red")
-                gradeLeveltext = self.getGradeAndLevelText()
                 turtle.hideturtle()
-                turtle.write(gradeLeveltext + "  计时: " + str(self.timer) + "  计步：" + str(self.counter) + "  积分: " + str(self.score), align="center", font=("Arial", 36, "normal"))
+                text = self.getGradeAndLevelText() + "  计时: " + str(self.timer) + "  计步：" + str(self.counter) + "  积分: " + str(self.score)
+                turtle.write(text, align="center", font=("Arial", self.fontSize, "normal"))
 
                 # 胜负判断
                 win_flag = True
@@ -233,7 +234,7 @@ class GamePage:
             pen = turtle.Pen()
             pen.hideturtle()
             pen.color("red")
-            pen.write("不能返回上一步", align="left", font=("Arial", 36, "normal"))
+            pen.write("不能返回上一步", align="left", font=("Arial", self.fontSize, "normal"))
             time.sleep(1)
             pen.clear()
 

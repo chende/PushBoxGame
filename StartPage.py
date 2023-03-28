@@ -10,6 +10,7 @@ class StartPage:
     showInstruction = False
     rankingText = None
     userName = ""
+    fontSize=30
 
     def __init__(self, resrouce_path):
         self.resrouce_path = resrouce_path
@@ -119,10 +120,10 @@ class StartPage:
             self.rankingText.penup()
             self.rankingText.pencolor("red")
             self.rankingText.goto(0, 30)
-            self.rankingText.write('玩家  等级  关卡  积分', align="center", font=("Arial", 32, "bold"))
+            self.rankingText.write('玩家  等级  关卡  积分', align="center", font=("Arial", self.fontSize, "bold"))
             self.rankingText.pencolor("orange")
-            self.rankingText.goto(0, -line_count*30)
-            self.rankingText.write(str, align="center", font=("Arial", 30, "normal"))
+            self.rankingText.goto(0, -line_count*self.fontSize)
+            self.rankingText.write(str, align="center", font=("Arial", self.fontSize, "normal"))
             self.rankingText.hideturtle()
 
     def onButtonRemoveScoreClick(self, x, y):
