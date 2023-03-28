@@ -1,6 +1,10 @@
-package command:
-Mac:
-pyinstaller --onefile --windowed --add-data "resources/*:resources/" --icon app_icon.icns --name 疯狂推箱子 main.py
-
-Windows:
-pyinstaller --onefile --windowed --add-data "resources/*;resources/" --icon app_icon.ico --name 疯狂推箱子 main.py
+                                                项目介绍：
+    本项目用python编程实现了一款推箱子的益智游戏。目的是训练小朋友的逻辑思考能力。在一个狭小的仓库中，要求把木箱放到指定的位置上，
+稍不小心就会出现箱子无法移动或者通道被堵住的情况，所以需要巧妙的利用有限的空间和通道，合理安排移动的次序和位置，才能顺利的完成任务。
+    这是一款闯关型的游戏，考虑不同玩家的水平，设置了三个游戏等级，玩家可以根据自己的水平选择不同的等级。每个等级又按照难易程度设置
+了三道关卡。每成功闯过一道关卡，就会进入下一关。完成一个等级之后则会升级进入下一等级。越往后越难，地图变得更复杂，箱子和目标位置变得
+更多，甚至出现中间有障碍物的情况，要求玩家认真思考，反复尝试，直至找到最优路径。
+    玩家每闯过一关，程序会记录等级和关卡以及当前积分。在开始界面点击排行榜按钮，会展示所有玩家的积分排行榜情况。按照积分由高到低排列，
+如果某个玩家玩了多次游戏。则取成绩最好的一次，即积分最高的那一次。
+    该程序用python编程语言编写，在PyCharm CE中编译运行。然后分别在MacOS和Windows系统下面用PyInstaller打包成可执行文件“疯狂推箱子
+MacOS-M2”和“疯狂推箱子Windows.exe”，双击即可运行。
