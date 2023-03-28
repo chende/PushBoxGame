@@ -1,4 +1,6 @@
 import turtle
+
+import XPath as xp
 import ranking as rk
 import scoring as sc
 
@@ -12,8 +14,8 @@ class StartPage:
     userName = ""
     fontSize=30
 
-    def __init__(self, resrouce_path):
-        self.resrouce_path = resrouce_path
+    def __init__(self):
+        self.resrouce_path = xp.instance.get_resource_path()
         self.gradeNum = 1
         self.userName = rk.instance.userName
 

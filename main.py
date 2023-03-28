@@ -1,14 +1,10 @@
-# import StartPage
 from StartPage import StartPage
 from GamePage import GamePage
-from XPath import XPath
 
 if __name__ == '__main__':
-    resrouce_path = XPath.get_resource_path("resources")
-
     while True:
-        startPage = StartPage(resrouce_path)
+        startPage = StartPage()
         startPage.display()
 
-        gamePage = GamePage(resrouce_path, startPage.gradeNum)
+        gamePage = GamePage(startPage.gradeNum)
         gamePage.display()

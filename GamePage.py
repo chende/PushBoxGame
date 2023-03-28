@@ -1,5 +1,6 @@
 import turtle
 from LevelManager import LevelManager
+import XPath as xp
 import scoring as sc
 import ranking as rk
 import copy
@@ -38,8 +39,9 @@ class GamePage:
     win_or_lose = None
     fontSize = 30
 
-    def __init__(self, resrouce_path, grade_num):
-        self.resrouce_path = resrouce_path
+    def __init__(self, grade_num):
+        self.resrouce_path = xp.instance.get_resource_path()
+
         self.grade_num = grade_num
         self.score = sc.instance.calculateScore()
 

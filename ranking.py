@@ -1,5 +1,5 @@
 import pandas as pd
-from XPath import XPath
+import XPath as xp
 
 class Ranking:
     data_path = ''
@@ -7,13 +7,13 @@ class Ranking:
     df = pd.DataFrame(columns=['玩家','等级','关卡','积分'])
 
     def __init__(self):
-        self.data_path = XPath.get_resource_path("data") + '/ranking.csv'
+        self.data_path = xp.instance.get_data_path()
         try:
             self.df = pd.read_csv(self.data_path)
             # data = {'玩家': ['峻宇','乐乐'], '等级': [2,2], '关卡': [3,2], '积分': [30,26]}
             # self.df = pd.DataFrame(data, columns=['玩家','等级','关卡','积分'])
         except Exception as e:
-            print("读取文件失败")
+            print("读取文件失败" + str(e))
 
     def addRecord(self, grade_num, level_num, score):
         # self.data.append([self.userName, grade_num, level_num, score])
@@ -22,7 +22,12 @@ class Ranking:
 
         df2 = df1.sort_values(['积分', '等级', '关卡', '玩家'], ascending=[False, False, False, True])
         self.df = df2.drop_duplicates(subset=['玩家'], keep='first')
-        self.df.to_csv(self.data_path, index=False)
+
+        try:
+            self.df.to_csv(self.data_path, index=False)
+        except Exception as e:
+            print("写取文件失败" + str(e))
+
         print(self.df)
 
     def showRankingStr(self):
